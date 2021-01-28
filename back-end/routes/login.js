@@ -7,6 +7,8 @@ const jwt=require('jsonwebtoken')
 const authMiddleware=require('../config/authMiddleware')
 require('dotenv').config() ;
 
+
+
 //login action 
 router.post('/',[
     body('email','Please enter a valid email !').isEmail().notEmpty(),
@@ -43,9 +45,9 @@ router.post('/',[
                }
            })
        })
+       .catch(err=>console.error(err.message)) ;
 })
 
-//login action ,load user data when logged in 
 
 router.get('/',authMiddleware,(req,res)=>{
    User.findById(req.userId).select("-password -__V")

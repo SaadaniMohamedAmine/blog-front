@@ -15,7 +15,8 @@ const authMiddleWare=(req,res,next)=>{
            throw err
        }
        req.userId=payload.userId ;
-       next() ;
-   })
+       
+   }) ;
+   next() ;
 }
 module.exports=authMiddleWare ;

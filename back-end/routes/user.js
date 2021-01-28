@@ -4,7 +4,7 @@ const User=require('../models/User') ;
 const {body,validationResult} =require('express-validator') ;
 const bcrypt = require('bcryptjs') ;
 const jwt=require('jsonwebtoken') ;
-
+require('dotenv').config() ;
 
 //register a new user
 router.post('/',
@@ -50,10 +50,10 @@ router.post('/',
                          if(err2) {throw err2} ;
                          newUser.password=hashedPwd ;
                           newUser.save() ;
-                         let paylaod={
+                         let payload={
                              userId:newUser._id
                          };
-                         jwt.sign(paylaod,"secert",(err,token)=>{
+                         jwt.sign(payload,process.env.SECRET_KEY,(err,token)=>{
                              if(err) throw err ;
                              res.send({token:token}) ;
                          })
